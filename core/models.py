@@ -15,11 +15,11 @@ class LinkQuerySet(models.QuerySet):
         return self.count()
 
     def total_redirections(self):
-        return self.aggregate(redirecciones=models.Sum('count'))
+        return self.aggregate(redirections=models.Sum('count'))
 
     def dates(self, pk):
         return self.values('date').annotate(
-            september = models.Sum('count', filter=models.Q(filter__gte=datetime.date(2024, 9, 1), filter__lte=datetime.date(2024, 9, 30)))
+            september = models.Sum('count', filter=models.Q(date__gte=datetime.date(2024, 9, 1), date__lte=datetime.date(2024, 9, 30)))
         ).filter(pk=pk)
 
 

@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %} URL Shortener {% endblock title %}
+
+{% block content %}
 <section class="section">
     <div class="container">
       <div class="columns">
@@ -10,10 +15,10 @@
           </h2>
           <br>
           <form method="POST">
-            //
+            {% csrf_token %}
             <div class="field has-addons">
               <div class="control">
-                //
+                {{ form.url }}
               </div>
               <div class="control">
                 <input type="submit" class="button is-info is-rounded is-medium" value="Acortar">
@@ -32,11 +37,11 @@
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ["Enlaces", "Redirecciones"],
+        labels: ["Links", "Redirections"],
         datasets: [
           {
             backgroundColor: ["#8e5ea2", "#3e95cd"],
-            data: ["//", "//"]
+            data: ["{{ total_links }}", "{{ total_redirections }}"]
           }
         ]
       },
@@ -52,3 +57,5 @@
       }
     });
   </script>
+
+{% endblock content %}
