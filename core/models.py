@@ -6,7 +6,7 @@ import datetime
 
 # Create your models here.
 class LinkQuerySet(models.QuerySet):
-    def decode_enlace(self, code):
+    def decode_link(self, code):
         decode = Hashids(min_length=4, alphabet='abcdefghijklmnopqrstuvxyz').decode(code)[0]
         self.filter(pk=decode).update(count=models.F('count') + 1)
         return self.filter(pk=decode).first().url
